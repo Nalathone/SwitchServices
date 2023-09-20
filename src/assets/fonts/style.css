@@ -1,0 +1,12 @@
+html,
+body {
+  font-family: "Boonhome" !important;
+}
+ @font-face {
+    font-family: "Boonhome";
+    src: url("./boonhome-400.otf");
+  }
+  @font-face {
+    font-family: "Phetsarath";
+    src: url("./phetsarath_ot.ttf");
+  }
