@@ -54,9 +54,9 @@
 
 <script setup>
 
-import mmoney from './MmoneyToggle.vue'
-import umoney from './UmoneyToggle.vue'
-import laopay from './LaopayToggle.vue'
+import mmoney from './toggle/MmoneyToggle.vue'
+import umoney from './toggle/UmoneyToggle.vue'
+import laopay from './toggle/LaopayToggle.vue'
 
 </script>
 

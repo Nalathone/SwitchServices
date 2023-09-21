@@ -26,74 +26,62 @@
             <!--=========================================== LAK ===========================================-->
             <div class="bg-gray-200 rounded-lg">
               <div class="flex items-center m-4">
-                <img width="220" height="220"
-                  class="center"
-                  src="../assets/images/LTC.jpg"
+                <img width="300" height="300"
+                  class="center rounded-3xl"
+                  src="../../assets/images/LTC.jpg"
                 />
                 
               </div>
               <text id="font-blue" class="font-bold center"
                   >LTC</text
                 >
-              <simswitch id="font-blue" class="move mb-5"></simswitch>
-             
-              <!--======================= End Grid =======================-->
+              <LTC id="font-blue" class="move mb-5"></LTC>
             </div>
-            <!--=========================================== End LAK ===========================================-->
-
-            <!--=========================================== THB ===========================================-->
             <div class="bg-gray-200 rounded-lg">
               <div class="flex items-center m-4">
-                <img width="220" height="220"
-                  class="center"
-                  src="../assets/images/TPLUS.png"
+                <img width="300" height="300"
+                  class="center rounded-3xl"
+                  src="../../assets/images/TPLUS.png"
                 />
               </div>
               <div>
                 <span id="font-blue" class="font-bold center"
                   >TPLUS</span
                 >
-                <simswitch id="font-blue" class="move mb-5"></simswitch>
+                <TPL id="font-blue" class="move mb-5"></TPL>
               </div>
             </div>
-
-            <!--=========================================== USD ===========================================-->
             <div class="bg-gray-200 rounded-lg">
               <div class="flex items-center m-4">
-                <img width="220" height="220"
-                  class="center"
-                  src="../assets/images/ETL.jpg"
+                <img width="300" height="300"
+                  class="center rounded-3xl"
+                  src="../../assets/images/ETL.jpg"
                 />
               </div>
               <div>
                 <span id="font-blue" class="font-bold center"
                   >ETL</span
                 >
-                <simswitch id="font-blue" class="move mb-5"></simswitch>
+                <ETL id="font-blue" class="move mb-5"></ETL>
               </div>
             </div>
-
-            <!--=========================================== CNY ===========================================-->
             <div class="bg-gray-200 rounded-lg">
               <div class="flex items-center m-4">
-                <img width="220" height="220"
-                  class="center"
-                  src="../assets/images/UNITEL.jpg"
+                <img width="300" height="300"
+                  class="center rounded-3xl"
+                  src="../../assets/images/UNITEL.jpg"
                 />
               </div>
               <div>
                 <span id="font-blue" class="font-bold center"
                   >UNITEL</span
                 >
-                <simswitch id="font-blue" class="move mb-5"></simswitch>
+                <UNT id="font-blue" class="move mb-5"></UNT>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!--=========================================== Waiting for authorize Content  ===========================================-->
-     
+      </div>   
     </div>
 
 
@@ -103,7 +91,10 @@
 
 </template>
 <script setup>
-import simswitch from './simswitch.vue';
+import ETL from './toggle/ETLToggle.vue';
+import TPL from './toggle/TPlusToggle.vue';
+import LTC from './toggle/LTCToggle.vue';
+import UNT from './toggle/UnitelToggle.vue';
 
 
 

@@ -235,7 +235,7 @@ import Headerbar from "../components/Headerbar.vue";
 import switchtog from '../components/switchtog.vue';
 import water from './water.vue';
 import lessing from './lessing.vue';
-import simservices from './simservices.vue';
+import simservices from './Mobile/simservices.vue';
 import Walletcontent from './Wallet/WalletContent.vue'
 
 
