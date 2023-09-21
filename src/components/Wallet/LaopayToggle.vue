@@ -1,20 +1,34 @@
 <template>
-    <div class="switch-toggle">
-      <button class="switch switch::after" :class="{ 'on': value, 'off': !value }" @click="toggleValue"></button>
-      <text class="status">Status: {{ status }}</text>
-    </div>
-  </template>
+  <div class="switch-toggle">
+    <button class="switch switch::after" :class="{ 'on': value, 'off': !value }" @click="toggleValue"></button>
+    <text class="status">Status: {{ status }}</text>
+  </div>
+</template>
 
-  <script>
-  import axios from 'axios'
-  
-  export default {
+<script>
+import axios from 'axios'
+
+export default {
   data() {
     return {
       value: false,
       status: 'Off',
       apiUrlOn: 'http://172.21.57.211:8080/jdb/v1/disableenablewalletaccount?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PROVIDER_CODE=LP&PROVIDER_STATUS=A', // replace with your API URL to turn on
       apiUrlOff: 'http://172.21.57.211:8080/jdb/v1/disableenablewalletaccount?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PROVIDER_CODE=LP&PROVIDER_STATUS=IN' // replace with your API URL to turn off
+    }
+  },
+  mounted() {
+    // Load the button state from localStorage
+    const savedState = localStorage.getItem("buttonState");
+    if (savedState) {
+      this.value = JSON.parse(savedState);
+      this.status = this.value ? 'On' : 'Off';
+    }
+  },
+  watch: {
+    // Save the button state to localStorage when it changes
+    value(newValue) {
+      localStorage.setItem("buttonState", JSON.stringify(newValue));
     }
   },
   methods: {
@@ -30,8 +44,8 @@
         .catch(error => console.log('API error:', error))
     }
   }
-  }
-  </script>
+}
+</script>
 
 <style scoped>
 .switch {
@@ -76,4 +90,5 @@
   position: absolute;
   margin-left: 1px;
   margin-top: 5px;
-}</style>
+}
+</style>

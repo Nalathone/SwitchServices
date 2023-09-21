@@ -9,27 +9,41 @@
   import axios from 'axios'
   
   export default {
-  data() {
-    return {
-      value: false,
-      status: 'Off',
-      apiUrlOn: 'http://172.21.57.211:8080/jdb/v1/disableenablewalletaccount?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PROVIDER_CODE=MM&PROVIDER_STATUS=A', // replace with your API URL to turn on
+    data() {
+      return {
+        value: false,
+        status: 'Off',
+        apiUrlOn: 'http://172.21.57.211:8080/jdb/v1/disableenablewalletaccount?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PROVIDER_CODE=MM&PROVIDER_STATUS=A', // replace with your API URL to turn on
       apiUrlOff: 'http://172.21.57.211:8080/jdb/v1/disableenablewalletaccount?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PROVIDER_CODE=MM&PROVIDER_STATUS=IN' // replace with your API URL to turn off
-    }
-  },
-  methods: {
-    toggleValue() {
-      this.value = !this.value
-      this.status = this.value ? 'On' : 'Off'
-      this.sendValueToApi()
+      }
     },
-    sendValueToApi() {
-      const apiUrl = this.value ? this.apiUrlOn : this.apiUrlOff
-      axios.post(apiUrl, { value: this.value })
-        .then(response => console.log('API response:', response))
-        .catch(error => console.log('API error:', error))
+    mounted() {
+      // Load the button state from localStorage
+      const savedState = localStorage.getItem("buttonState");
+      if (savedState) {
+        this.value = JSON.parse(savedState);
+        this.status = this.value ? 'On' : 'Off';
+      }
+    },
+    watch: {
+      // Save the button state to localStorage when it changes
+      value(newValue) {
+        localStorage.setItem("buttonState", JSON.stringify(newValue));
+      }
+    },
+    methods: {
+      toggleValue() {
+        this.value = !this.value
+        this.status = this.value ? 'On' : 'Off'
+        this.sendValueToApi()
+      },
+      sendValueToApi() {
+        const apiUrl = this.value ? this.apiUrlOn : this.apiUrlOff
+        axios.post(apiUrl, { value: this.value })
+          .then(response => console.log('API response:', response))
+          .catch(error => console.log('API error:', error))
+      }
     }
-  }
   }
   </script>
 
