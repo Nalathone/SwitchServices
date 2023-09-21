@@ -1,14 +1,14 @@
 <template>
-    <div class="switch-toggle">
-      <button class="switch switch::after" :class="{ 'on': value, 'off': !value }" @click="toggleValue"></button>
-      <text class="status">Status: {{ status }}</text>
-    </div>
-  </template>
+  <div class="switch-toggle">
+    <button class="switch switch::after" :class="{ 'on': value, 'off': !value }" @click="toggleValue"></button>
+    <text class="status">Status: {{ status }}</text>
+  </div>
+</template>
   
-  <script>
-  import axios from 'axios'
-  
-  export default {
+<script>
+import axios from 'axios'
+
+export default {
   data() {
     return {
       value: false,
@@ -30,21 +30,22 @@
         .catch(error => console.log('API error:', error))
     }
   }
-  }
-  </script>
+}
+</script>
   
-  <style scoped>
-  .switch {
+<style scoped>
+.switch {
   position: relative;
   display: inline-block;
   left: 150px;
   width: 50px;
   height: 30px;
-  background:#1e89e1;
+  background: #1e89e1;
   border-radius: 100px;
   transition: all 0.6s;
-  }
-  .switch::after {
+}
+
+.switch::after {
   content: "";
   position: absolute;
   width: 28px;
@@ -54,28 +55,26 @@
   ;
   top: 1px;
   left: 1px;
-  
+
   transition: all 0.6s;
-  }
-  .off.switch{
+}
+
+.off.switch {
   background-color: white;
-  
-  
-  }
-  .on.switch::after {
+
+
+}
+
+.on.switch::after {
   background-color: #cccccc;
   transform: translatex(20px);
-  
+
   ;
-  }
-  .status {
+}
+
+.status {
   position: absolute;
   margin-left: 1px;
   margin-top: 5px;
-  
-  
-  
-  
-  
-  }
-  </style>
+}
+</style>

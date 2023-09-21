@@ -2,9 +2,9 @@
   
   <div class="relative flex min-h-screen">
     <!--=========================================== Sidebar ===========================================-->
-    <div class="flex flex-col justify-between bg-white text-gray-900 w-80">
+    <div class="flex flex-col justify-between bg-white text-gray-900 w-72">
       <div>
-        <div class="p-1 pl-3 flex items-center">
+        <div class="p-1 pl-3 flex items-center justify-center">
           <img
             alt="Rubick Tailwind HTML Admin Template"
             class="self-center w-12"
@@ -61,6 +61,19 @@
                 :icon="['fas', 'money-bill-trend-up']"
               />
               <span class="text-md ml-2">SIM Services</span>
+            </a>
+
+            <!-- Wallet services -->
+            <a
+              @click="currentTab = 5"
+              :class="[currentTab == 5 ? 'active' : '']"
+              class="m-3 p-2.5 flex items-center rounded-lg px-4"
+            >
+              <font-awesome-icon
+                size="xl"
+                :icon="['fas', 'wallet']"
+              />
+              <span class="text-md ml-2">Wallet Service</span>
             </a>
 
 
@@ -161,7 +174,6 @@
                 </div>
               </div>
 
-              <!--=========================================== CNY ===========================================-->
               <div class="bg-gray-200 rounded-lg">
                 <div class="flex items-center m-4">
                   <img
@@ -198,6 +210,12 @@
          
         </div>
 
+        <!-- wallet component -->
+        <div v-if="currentTab === 5" class="tabcontent">
+          <Walletcontent/>
+         
+        </div>
+
       </div>
     </div>
   </div>
@@ -218,6 +236,7 @@ import switchtog from '../components/switchtog.vue';
 import water from './water.vue';
 import lessing from './lessing.vue';
 import simservices from './simservices.vue';
+import Walletcontent from './Wallet/WalletContent.vue'
 
 
 //fontawesome icon
@@ -228,6 +247,7 @@ import {
   faListCheck,
   faMoneyBill,
   faMoneyBillTrendUp,
+  faWallet
  
   
 } from "@fortawesome/free-solid-svg-icons";
@@ -237,7 +257,8 @@ library.add(
   faMoneyBill,
   faListCheck,
   faMoneyBillTrendUp,
-  faArrowRightFromBracket
+  faArrowRightFromBracket,
+  faWallet
 );
 
 

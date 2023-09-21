@@ -1,20 +1,20 @@
 <template>
-  <div class="switch-toggle">
-    <button class="switch switch::after" :class="{ 'on': value, 'off': !value }" @click="toggleValue"></button>
-    <text class="status">Status: {{ status }}</text>
-  </div>
-</template>
-  
-<script>
-import axios from 'axios'
+    <div class="switch-toggle">
+      <button class="switch switch::after" :class="{ 'on': value, 'off': !value }" @click="toggleValue"></button>
+      <text class="status">Status: {{ status }}</text>
+    </div>
+  </template>
 
-export default {
+  <script>
+  import axios from 'axios'
+  
+  export default {
   data() {
     return {
       value: false,
       status: 'Off',
-      apiUrlOn: '172.21.57.211:8080/jdb/v1/disableenableedlprovince?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PRO_ID=01&SHORT_NAME=VC&status=O', // replace with your API URL to turn on
-      apiUrlOff: '172.21.57.211:8080/jdb/v1/disableenableedlprovince?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PRO_ID=01&SHORT_NAME=VC&status=C' // replace with your API URL to turn off
+      apiUrlOn: 'http://172.21.57.211:8080/jdb/v1/disableenablewalletaccount?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PROVIDER_CODE=UM&PROVIDER_STATUS=A', // replace with your API URL to turn on
+      apiUrlOff: 'http://172.21.57.211:8080/jdb/v1/disableenablewalletaccount?sign=ed0e999dda8e923cb1eaa402384213a3439db0fe556e68ba24a8a985947f14dd&PROVIDER_CODE=UM&PROVIDER_STATUS=IN' // replace with your API URL to turn off
     }
   },
   methods: {
@@ -30,8 +30,8 @@ export default {
         .catch(error => console.log('API error:', error))
     }
   }
-}
-</script>
+  }
+  </script>
 
 <style scoped>
 .switch {
@@ -76,9 +76,4 @@ export default {
   position: absolute;
   margin-left: 1px;
   margin-top: 5px;
-
-
-
-
-
 }</style>
