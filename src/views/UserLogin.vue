@@ -15,9 +15,7 @@
             />
           </div>
           <div>
-            <span
-              id="font-blue"
-              class="text-3xl font-bold flex justify-center"
+            <span id="font-blue" class="text-3xl font-bold flex justify-center"
               >JDB Switch Services</span
             >
           </div>
@@ -30,12 +28,13 @@
                 class="block mb-2 text-md font-medium"
                 >UserID</label
               >
-              <input v-model="username"
+              <input
+                v-model="username"
                 id="large-input"
                 type="text"
                 autocomplete="on"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-2.5"
-              >
+              />
               <!--Error validate-->
               <!-- <div class="mt-1">
                   <span
@@ -49,7 +48,7 @@
             </div>
 
             <div>
-              <label 
+              <label
                 for="large-input"
                 id="font-blue"
                 class="block mb-2 text-md font-medium"
@@ -57,18 +56,20 @@
               >
 
               <div class="relative mb-6">
-                <button 
+                <button
                   @click="showPassword = !showPassword"
                   class="absolute inset-y-0 right-3 flex items-center pl-3.5 text-gray-400"
                 >
                   <EyeSlashIcon v-if="!showPassword" class="w-5 h-5" />
                   <EyeIcon v-if="showPassword" class="w-5 h-5" />
                 </button>
-                <input v-model="password"
+                <input
+                  v-model="password"
                   id="large-input"
                   :type="showPassword ? 'text' : 'password'"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full p-2.5"
-                >
+                  @keydown.enter="login"
+                />
                 <!--Error validated-->
                 <!-- <div class="mt-1">
                   <span
@@ -82,9 +83,9 @@
               </div>
             </div>
 
-            <div  class="pt-4 pb-5">
-           
-              <button @click="login"
+            <div class="pt-4 pb-5">
+              <button
+                @click="login"
                 id="btn-signIn"
                 type="summit"
                 class="flex justify-center w-full text-white font-medium rounded-lg text-md px-5 py-2.5 text-center"
@@ -100,25 +101,30 @@
 </template>
 
 <script setup>
-
-
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import Main from '../components/Main.vue';
+import Main from "../components/Main.vue";
 
 const router = useRouter();
-let username =ref('');
-let password =ref('');
+let username = ref("");
+let password = ref("");
+const userInfo = ref();
 
-function login(){
-  if (username.value === "two" && password.value === "1234") {
+async function login() {
+  const data = await fetch("config.json");
+  userInfo.value = await data.json();
+
+  if (
+    userInfo.value.username === username.value &&
+    userInfo.value.password === password.value
+  ) {
+    localStorage.setItem('usr', window.btoa(username.value))
+    localStorage.setItem('pw', window.btoa(password.value))
     router.push("/");
-  }else {
-
-  alert("invalid username or Password");
+  } else {
+    alert("invalid username or Password");
   }
 }
-
 </script>
 
 <style scoped>

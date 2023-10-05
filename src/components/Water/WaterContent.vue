@@ -7,7 +7,7 @@
           class="mr-2 mt-10"
           :icon="['fas', 'circle-chevron-right']"
         />
-        <span class="font-bold text-lg container">Leasing Switch Services</span>
+        <span class="font-bold text-lg container">Water Switch Services</span>
       </div>
     </div>
     <!-- End Top content -->
@@ -16,35 +16,30 @@
     <div class="m-4 mt-6 p-2.5 rounded-lg px-4 bg-white">
       <div class="mt-3">
         <span id="font-blue" class="font-bold text-2xl"
-          >Leasing Switch Services</span
+          >Water Switch Services</span
         >
       </div>
-      <div id="font-blue" class="mb-5 mt-5 grid grid-cols-3 gap-5 textsize">
-        <div v-for="(item, index) in companys" :key="index">
+      <div id="font-blue" class="mb-5 mt-5 grid grid-cols-4 gap-5 textsize">
+        <div v-for="(item, index) in province" :key="index">
           <div
             class="mb-5 bg-gray-100 rounded-lg shadow-md text-center p-5 m-0 w-full"
           >
-            <img
-              width="220"
-              height="220"
-              :src="getImage(index)"
-              alt="Wallet Logo"
-              class="mx-auto mb-3"
-            />
-            <p>
+          <img width="220" height="220" class="center" src="../../assets/images/water.jpg" alt="province image">
+          
+            <p class=mt-2>
               <span class="hide">{{
                 index < 9 ? "0" + (index + 1) : index + 1
               }}</span>
-              {{ item[1] }}
+              {{ item[2] }}
             </p>
             <button
               class="switch mb-5 center"
               :id="'button' + (index + 1)"
-              @click="sendRequest(item[0], item[3], index)"
-              :class="{ on: item[3] === 'O' }"
+              @click="sendRequest(item[0], item[3], item[4], index)"
+              :class="{ on: item[4] === 'O' }"
             >
               <div class="status">
-                Status: {{ item[3] === "O" ? "ON" : "OFF" }}
+                Status: {{ item[4] === "O" ? "ON" : "OFF" }}
               </div>
             </button>
           </div>
@@ -58,50 +53,33 @@
 import { computed, onMounted, ref, watch } from "vue";
 import axios from "axios";
 // import store
-import { useLeasingStore } from "../../stores/leasing";
+import { useWaterStore } from "../../stores/Water.js";
 
 export default {
   setup() {
-    const leasingStore = useLeasingStore();
-    const companys = computed(() => leasingStore.getCompaniesInfo);
-    const sendRequest = async (companys, value, index) => {
+    const waterStore = useWaterStore();
+    const province = computed(() => waterStore.getprovinceInfo);
+    const sendRequest = async (province, shortname, value, index) => {
      
       const request = {
-        companyId: companys,
+        proId: province,
+        shortname: shortname,
         status: value === "O" ? "C" : "O",
       };
-      await leasingStore.getLeasingService(request).then(async () => {
-        await leasingStore.getDisplayLeasingService();
+      await waterStore.getWaterService(request).then(async () => {
+        await waterStore.getDisplayWaterService();
       });
     };
 
-    const getImage = (index) => {
-      if (index === 0) return "src/assets/images/Leasingpic/AVFINAN.jpg";
-      if (index === 1) return "src/assets/images/Leasingpic/gll.png";
-      if (index === 2) return "src/assets/images/Leasingpic/bic.png";
-      if (index === 3) return "src/assets/images/Leasingpic/phet.jpg";
-      if (index === 4) return "src/assets/images/Leasingpic/sml.png";
-      if (index === 5) return "src/assets/images/Leasingpic/dgb.jpg";
-      if (index === 6) return "src/assets/images/Leasingpic/SMI.jpg";
-      if (index === 7) return "src/assets/images/Leasingpic/aeon.png";
-      if (index === 8) return "src/assets/images/Leasingpic/kolao.jpg";
-      if (index === 9) return "src/assets/images/Leasingpic/thai.jpg";
-      if (index === 10) return "src/assets/images/Leasingpic/krung.jpg";
-      if (index === 11) return "src/assets/images/Leasingpic/kb.jpg";
-      if (index === 12) return "src/assets/images/Leasingpic/maha.jpg";
-      if (index === 13) return "src/assets/images/Leasingpic/lat.jpg";
-    };
-
     onMounted(async () => {
-      if (!companys.value || companys.value.length <= 0) {
-        await leasingStore.getDisplayLeasingService();
+      if (!province.value || province.value.length <= 0) {
+        await waterStore.getDisplayWaterService();
       }
     });
 
     return {
-      companys,
+      province,
       sendRequest,
-      getImage,
     };
   },
 };

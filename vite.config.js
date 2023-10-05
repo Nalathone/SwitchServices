@@ -12,11 +12,11 @@ export default defineConfig({
     },
   },
   server: {
-    port: 8080,
+    port: 7007,
     host: true,
     proxy: {
-      "/jdb-solid/uat": {
-        target: "http://172.21.57.211:8080",
+      "/jdb/v1/": {
+        target: "http://172.21.25.79:7007",
       },
     },
   },
